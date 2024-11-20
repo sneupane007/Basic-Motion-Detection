@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motion Log Dashboard</title>
+    <script src="/script.js" defer></script>
+</head>
+<body>
+    <h1>Motion Log Dashboard</h1>
+    <label for="range">Select Data Range:</label>
+    <select id="range">
+        <option value="day">Last Day</option>
+        <option value="week">Last Week</option>
+        <option value="month">Last Month</option>
+        <option value="three_months">Last Three Months</option>
+    </select>
+    <button id="fetchData">Fetch Data</button>
+
+    <h2>Motion Events</h2>
+    <div id="chart">
+        <img id="plotImage" src="" alt="Motion Events Plot" style="max-width: 100%;">
+    </div>
+    
+</body>
+</html>
