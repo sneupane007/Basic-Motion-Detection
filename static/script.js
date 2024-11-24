@@ -15,4 +15,5 @@ document.getElementById('fetchData').addEventListener('click', async () => {
         console.error("Error fetching data:", error);
         chartDiv.innerHTML = '<p>Failed to load data.</p>';
     }
-});
+}
+)

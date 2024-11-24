@@ -87,8 +87,14 @@ def plot_motion_data(df, group_by='hour'):
     plt.title(title)
     plt.xticks(rotation=0)
     plt.tight_layout()
-    plt.show()
 
+    # Save the plot to a BytesIO object
+    img = io.BytesIO()
+    plt.savefig(img, format='png')
+    plt.close()  # Close the plot to free memory
+    img.seek(0)  # Reset file pointer to the beginning of the file
+
+    return img
 
 
 @app.route('/api/data', methods=['GET'])

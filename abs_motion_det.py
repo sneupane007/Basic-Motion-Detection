@@ -31,7 +31,7 @@ while True:
         x, y, w, h = cv2.boundingRect(contour)
         cv2.rectangle(frame1, (x,y), (x+w, y+h), (0,255,0), 2)
     
-
+    
 
     cv2.imshow('Motion Detection', frame1)
     frame1 = frame2
