@@ -3,24 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Motion Log Dashboard</title>
-    <script src="/script.js" defer></script>
+    <title>Motion Events Dashboard</title>
+    <link href="static/css/compiled-tailwind.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Motion Log Dashboard</h1>
-    <label for="range">Select Data Range:</label>
-    <select id="range">
-        <option value="day">Last Day</option>
-        <option value="week">Last Week</option>
-        <option value="month">Last Month</option>
-        <option value="three_months">Last Three Months</option>
-    </select>
-    <button id="fetchData">Fetch Data</button>
+<body class="bg-gray-100 text-gray-800">
+    <!-- Header -->
+    <header class="header">
+        <h1 class="header-title">Visual Representation of Motion Events</h1>
+        <p class="header-subtitle">Analyze motion events data dynamically with interactive visualizations</p>
+    </header>
 
-    <h2>Motion Events</h2>
-    <div id="chart">
-        <img id="plotImage" src="" alt="Motion Events Plot" style="max-width: 100%;">
-    </div>
-    
+    <!-- Main Content -->
+    <main class="container mx-auto mt-8 px-4">
+        <!-- Filters Section -->
+        <section class="filters">
+            <h2 class="text-lg font-semibold mb-4">Filters</h2>
+            <div class="flex flex-wrap items-center gap-4">
+                <div class="flex flex-col">
+                    <label for="range" class="filter-label">Select Range:</label>
+                    <select id="range" class="filter-select">
+                        <option value="day">Day</option>
+                        <option value="week" selected>Week</option>
+                        <option value="month">Month</option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="group_by" class="filter-label">Group By:</label>
+                    <select id="group_by" class="filter-select">
+                        <option value="hour" selected>Hour</option>
+                        <option value="minute">Minute</option>
+                    </select>
+                </div>
+
+                <button onclick="fetchPlot()" class="generate-button">Generate Plot</button>
+            </div>
+        </section>
+
+        <!-- Visualization Section -->
+        <section class="chart-container">
+            <h2 class="text-lg font-semibold mb-4">Motion Events Visualization</h2>
+            <img id="motion-plot" src="" alt="Motion Plot will be displayed here" class="chart-image">
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Motion Events Dashboard. All rights reserved.</p>
+    </footer>
+
+    <!-- Link to the external JavaScript file -->
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </body>
 </html>

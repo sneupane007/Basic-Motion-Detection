@@ -3,37 +3,13 @@ import pandas as pd
 from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 import io
+import base64
+import plotly.express as px
 
 # Filepath for motion_log.csv
 FILE_PATH = 'motion_log.csv'
 
 app = Flask(__name__)
-
-
-def trim_csv(file_path, max_days=7):
-    """
-    Trim the CSV file to only keep rows within the past 'max_days' days.
-    """
-    # Load the CSV file
-    try:
-        df = pd.read_csv(file_path, header=None, names=['timestamp'])
-        df['timestamp'] = pd.to_datetime(df['timestamp'], errors='coerce')
-    except FileNotFoundError:
-        print(f"File {file_path} not found. Creating a new file.")
-        return pd.DataFrame(columns=['timestamp'])
-
-    # Drop invalid timestamps
-    df = df.dropna(subset=['timestamp'])
-
-    # Calculate the cutoff date
-    cutoff_date = datetime.now() - timedelta(days=max_days)
-
-    # Keep only rows within the last 'max_days'
-    df = df[df['timestamp'] >= cutoff_date]
-
-    # Save the trimmed data back to the file
-    df.to_csv(file_path, index=False, header=False)
-    return df
 
 def query_data(file_path, days_back=None):
     """
@@ -91,10 +67,11 @@ def plot_motion_data(df, group_by='hour'):
     # Save the plot to a BytesIO object
     img = io.BytesIO()
     plt.savefig(img, format='png')
-    plt.close()  # Close the plot to free memory
-    img.seek(0)  # Reset file pointer to the beginning of the file
+    
+    # Embed the result in the html output.
+    fig_data = base64.b64encode(img.getbuffer()).decode("ascii")
 
-    return img
+    return fig_data
 
 
 @app.route('/api/data', methods=['GET'])
@@ -117,9 +94,7 @@ def get_data():
     if days_back is None:
         return jsonify({"error": "Invalid range type"}), 400
 
-    # Trim the CSV file to keep only recent data (e.g., past 90 days)
-    # Adjust max_days as needed
-    trim_csv(FILE_PATH, max_days=90)
+    
 
     # Query data
     df = query_data(FILE_PATH, days_back)
@@ -128,11 +103,8 @@ def get_data():
     plot_image = plot_motion_data(df, group_by=group_by)
     if plot_image is None:
         return jsonify({"error": "No data available for the selected range"}), 404
-
     # Send the image file
-    return send_file(plot_image, mimetype='image/png')
-
-
+    return jsonify({"plot": plot_image})
 
 
 @app.route('/')

@@ -1,19 +1,25 @@
-document.getElementById('fetchData').addEventListener('click', async () => {
+// Fetch plot and update the chart image
+async function fetchPlot() {
     const range = document.getElementById('range').value;
-    const chartDiv = document.getElementById('chart');
-    const plotImage = document.getElementById('plotImage');
+    const groupBy = document.getElementById('group_by').value;
 
-    // Fetch the plot image from the API
+    // Construct API URL
+    const apiUrl = `/api/plot?range=${range}&group_by=${groupBy}`;
+
     try {
-        const response = await fetch(`/api/data?range=${range}`);
+        // Fetch data from the API
+        const response = await fetch(apiUrl);
         if (!response.ok) {
-            throw new Error("Failed to fetch data");
+            throw new Error('Failed to fetch plot');
         }
-        // Set the image source to the response URL
-        plotImage.src = `/api/data?range=${range}&_=${new Date().getTime()}`;
+
+        const data = await response.json();
+        const imgElement = document.getElementById('motion-plot');
+
+        // Update the image source
+        imgElement.src = `data:image/png;base64,${data.plot}`;
     } catch (error) {
-        console.error("Error fetching data:", error);
-        chartDiv.innerHTML = '<p>Failed to load data.</p>';
+        console.error('Error fetching plot:', error);
+        alert('Could not load plot. Please try again.');
     }
 }
-)
