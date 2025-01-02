@@ -1,4 +1,6 @@
 __pycache__
 node_modules
 motion_log.csv
-pac
+package-lock.json
+package.json
+tailwind.config.js
