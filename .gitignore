@@ -2,3 +2,4 @@ application/cache
 motion-log.csv
 node_modules
 __pycache__
+app/
