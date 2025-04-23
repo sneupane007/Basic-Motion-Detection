@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - Motion Events Dashboard</title>
+    <link
+      href="{{ url_for('static', filename='css/styles.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <h1 class="header-title">About Motion Events Dashboard</h1>
+      <p class="header-subtitle">
+        Learn more about our motion detection system
+      </p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+      <section class="chart-container">
+        <h2 class="mb-20">Project Overview</h2>
+        <p>
+          The Motion Detection Dashboard is a Python Flask application that
+          detects and monitors motion events using your computer's camera. The
+          system uses computer vision techniques to identify motion and logs
+          these events for later analysis.
+        </p>
+
+        <h3 class="mt-20 mb-20">How It Works</h3>
+        <p>
+          The motion detection system uses OpenCV to process video frames from
+          your webcam. When motion is detected, the event is logged with a
+          timestamp in a CSV file. The dashboard application visualizes this
+          data to help you understand patterns of movement in your monitored
+          area.
+        </p>
+
+        <h3 class="mt-20 mb-20">Key Features</h3>
+        <ul>
+          <li>Real-time motion detection using your webcam</li>
+          <li>Event logging with precise timestamps</li>
+          <li>Interactive data visualization dashboard</li>
+          <li>Adjustable time ranges (day, week, month)</li>
+          <li>Hour or minute-based aggregation of events</li>
+        </ul>
+
+        <h3 class="mt-20 mb-20">Technologies Used</h3>
+        <ul>
+          <li>Python for core functionality</li>
+          <li>OpenCV for computer vision and motion detection</li>
+          <li>Flask for the web application framework</li>
+          <li>Pandas for data processing</li>
+          <li>Matplotlib for data visualization</li>
+        </ul>
+
+        <div class="mt-20">
+          <a href="/" class="generate-button">Return to Dashboard</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2024 Motion Events Dashboard. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

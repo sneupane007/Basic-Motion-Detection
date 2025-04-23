@@ -5,41 +5,41 @@
 
 /* Custom Component Classes */
 .header {
-    @apply bg-green-600 text-white py-4 shadow-md text-center;
+  @apply bg-green-600 text-white py-4 shadow-md text-center;
 }
 
 .header-title {
-    @apply text-2xl font-bold;
+  @apply text-2xl font-bold;
 }
 
 .header-subtitle {
-    @apply text-sm;
+  @apply text-sm;
 }
 
 .filters {
-    @apply bg-white p-4 rounded-lg shadow-md;
+  @apply bg-white p-4 rounded-lg shadow-md;
 }
 
 .filter-label {
-    @apply text-sm font-medium;
+  @apply text-sm font-medium;
 }
 
 .filter-select {
-    @apply border border-gray-300 rounded-lg p-2 text-sm;
+  @apply border border-gray-300 rounded-lg p-2 text-sm;
 }
 
 .generate-button {
-    @apply bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700;
+  @apply bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700;
 }
 
 .chart-container {
-    @apply bg-white p-4 rounded-lg shadow-md mt-8 text-center;
+  @apply bg-white p-4 rounded-lg shadow-md mt-8 text-center;
 }
 
 .chart-image {
-    @apply w-full max-w-3xl rounded-lg mx-auto;
+  @apply w-full max-w-3xl rounded-lg mx-auto;
 }
 
 .footer {
-    @apply bg-gray-800 text-white text-center py-4 mt-8;
+  @apply bg-gray-800 text-white text-center py-4 mt-8;
 }
