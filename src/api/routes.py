@@ -6,25 +6,20 @@ import io
 import base64
 import pandas as pd
 from datetime import datetime, timedelta
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-from src.config.settings import LOG_FILE
-from src.utils.event_logger import trim_csv
+from config.settings import LOG_FILE
+
 
 # Create a Blueprint for API routes
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
 def query_data(file_path, days_back=None):
     """
-    Query data from the CSV file for the past 'days_back' days.
-    
-    Args:
-        file_path (str): Path to the CSV log file.
-        days_back (int): Number of days to query back.
-        
-    Returns:
-        DataFrame: The filtered DataFrame.
     """
+    
     # Load the CSV file
     try:
         df = pd.read_csv(file_path, header=None, names=['timestamp'])
@@ -36,24 +31,15 @@ def query_data(file_path, days_back=None):
     # Drop invalid timestamps
     df = df.dropna(subset=['timestamp'])
 
-    # If days_back is specified, filter data for that range
-    if days_back is not None:
-        cutoff_date = datetime.now() - timedelta(days=days_back)
-        df = df[df['timestamp'] >= cutoff_date]
 
     return df
 
 def plot_motion_data(df, group_by='hour'):
     """
-    Plot motion data grouped by 'hour' or 'minute'.
-    
-    Args:
-        df (DataFrame): The DataFrame containing motion timestamps.
-        group_by (str): How to group the data ('hour' or 'minute').
-        
     Returns:
         str: Base64 encoded image data.
     """
+    
     if df.empty:
         print("No data available to plot.")
         return None
@@ -73,7 +59,7 @@ def plot_motion_data(df, group_by='hour'):
         return None
 
     # Plotting
-    plt.figure(figsize=(12, 6))
+    plt.figure(figsize=(6, 6))
     event_counts.plot(kind='bar', color='purple')
     plt.xlabel(xlabel)
     plt.ylabel("Number of Motion Events")
@@ -84,20 +70,22 @@ def plot_motion_data(df, group_by='hour'):
     # Save the plot to a BytesIO object
     img = io.BytesIO()
     plt.savefig(img, format='png')
-    
+    plt.close()
     # Embed the result in the html output.
-    fig_data = base64.b64encode(img.getbuffer()).decode("ascii")
-
-    return fig_data
+    img.seek(0)
+    plot_image = base64.b64encode(img.read()).decode('utf-8')
+    
+    return plot_image
 
 @api_bp.route('/data', methods=['GET'])
 def get_data():
     """
-    API endpoint to fetch motion data for a specified range.
+    fetch API end motion data for a specified range.
     """
-    range_type = request.args.get('range', 'week')  # Get range from query params
-    group_by = request.args.get('group_by', 'hour')  # 'hour' or 'minute'
+    range_type = request.args.get('range', default = 'day')  # Get range from query params
+    group_by = request.args.get('group_by', default = 'hour')  # 'hour' or 'minute'
 
+    print(f"Range: {range_type}, Group By: {group_by}")
     # Map range_type to days_back
     range_map = {
         'day': 1,
@@ -118,5 +106,6 @@ def get_data():
     if plot_image is None:
         return jsonify({"error": "No data available for the selected range"}), 404
         
-    # Send the image file
+    # Send the image file to static/js/main.js
     return jsonify({"plot": plot_image}) 
+

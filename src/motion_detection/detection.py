@@ -1,4 +1,4 @@
-# Frame differencing method for motion detection
+# Frame differencing 
 import cv2 
 from src.utils.event_logger import log_motion_event
 
@@ -7,7 +7,7 @@ def start_motion_detection():
     ret, frame1 = cap.read()
     ret, frame2 = cap.read()
 
-    # Background Subtraction Method to refine the motion detection
+    #Background Subtraction
     backSub = cv2.createBackgroundSubtractorMOG2()
 
     try:
@@ -20,11 +20,11 @@ def start_motion_detection():
             dilated = cv2.dilate(thresh, None, iterations=3)
             contours, _ = cv2.findContours(dilated, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
             
-            # Log motion event
+            #Log motion 
             if contours:
                 log_motion_event()
 
-            # Draw rectangles around detected motion
+            #rectangles 
             for contour in contours:
                 if cv2.contourArea(contour) < 1000:
                     continue

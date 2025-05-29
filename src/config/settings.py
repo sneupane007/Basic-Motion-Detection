@@ -14,7 +14,7 @@ LOG_FILE = os.path.join(DATA_DIR, 'motion_log.csv')
 # Flask settings
 DEBUG = True
 HOST = '0.0.0.0'
-PORT = 5000
+PORT = 5001
 
 # Motion detection settings
 MOTION_THRESHOLD = 20

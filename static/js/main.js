@@ -5,10 +5,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Initial load
   fetchPlot();
-
-  // Set up event listeners for filter changes
-  document.getElementById("range").addEventListener("change", fetchPlot);
-  document.getElementById("group_by").addEventListener("change", fetchPlot);
 });
 
 /**
@@ -17,7 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
 function fetchPlot() {
   // Show loading state
   const plotImage = document.getElementById("motion-plot");
-  plotImage.src = "/static/img/loading.gif";
+  plotImage.src =
+    "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjF5a2x6c3cycXM3MXA0ZGVqeHlhbXkzNDJsNzFrcXFnYWxvMDU3MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oEjI6SIIHBdRxXI40/giphy.gif";
   plotImage.alt = "Loading...";
 
   // Get filter values

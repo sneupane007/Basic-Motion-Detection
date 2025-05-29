@@ -4,9 +4,9 @@ Main application initialization
 from flask import Flask
 import os
 
-from src.config.settings import DEBUG, HOST, PORT
-from src.api.routes import api_bp
-from src.dashboard.routes import dashboard_bp
+from config.settings import DEBUG, HOST, PORT
+from api.routes import api_bp
+from dashboard.routes import dashboard_bp
 
 def create_app():
     """

@@ -2,9 +2,10 @@ import csv
 import os
 import pandas as pd
 from datetime import datetime, timedelta
+from config.settings import LOG_FILE
 
 # Default log file path
-DEFAULT_LOG_PATH = 'motion_log.csv'
+DEFAULT_LOG_PATH = LOG_FILE
 
 def log_motion_event(log_path=DEFAULT_LOG_PATH):
     """
