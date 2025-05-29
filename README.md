@@ -1,53 +1,24 @@
 # Motion Detection Dashboard
 
-A Python and Flask-based application for real-time motion detection and visualization.
+A Python and Flask-based application for real-time motion detection and visualization. I have tried to make the whole project readable and changable. I do plan to add intuitive comments in the future for better understanding. 
 
-## Features
+### Features
 
-- Real-time motion detection using your webcam
-- Event logging with precise timestamps
-- Interactive data visualization dashboard
+- Real-time motion detection using the device webcam(Need work on external webcam)
+- Event logging with timestamps
+- data visualization dashboard
 - Adjustable time ranges (day, week, month, 3 months)
 - Hour or minute-based aggregation of events
 
-## Project Structure
-
-```
-├── data/               # Directory for storing motion log data
-├── src/                # Source code
-│   ├── api/            # API endpoints
-│   ├── config/         # Configuration settings
-│   ├── core/           # Core application logic
-│   ├── dashboard/      # Dashboard routes
-│   ├── motion_detection/  # Motion detection logic
-│   ├── utils/          # Utility functions
-│   └── app.py          # Main application initialization
-├── static/             # Static assets
-│   ├── css/            # CSS stylesheets
-│   ├── js/             # JavaScript files
-│   └── img/            # Images
-├── templates/          # HTML templates
-│   ├── index.html      # Dashboard template
-│   ├── about.html      # About page template
-│   └── settings.html   # Settings page template
-├── run.py              # Main entry point
-└── requirements.txt    # Python dependencies
-```
-
-## Installation
+### Installation
 
 1. Clone the repository:
-
-   ```
-   git clone <repository-url>
-   cd motion-detection-dashboard
-   ```
 
 2. Create and activate a virtual environment:
 
    ```
    python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   source venv/bin/activate
    ```
 
 3. Install dependencies:
@@ -55,28 +26,23 @@ A Python and Flask-based application for real-time motion detection and visualiz
    pip install -r requirements.txt
    ```
 
-## Usage
+### Usage
 
 Run the application:
 
 ```
-python run.py --mode all
+python program.py
 ```
 
-Available modes:
+Access the dashboard at http://localhost:5001
 
-- `web`: Run only the web dashboard
-- `detection`: Run only the motion detection
-- `all`: Run both the dashboard and motion detection (default)
-
-Access the dashboard at http://localhost:5000
-
-## Requirements
+### Requirements
 
 - Python 3.8 or higher
 - Webcam (for motion detection)
 - Flask and dependencies listed in requirements.txt
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+### Things left to do
+- improve the detection algorithm
+- for now I have copied all the css from else where. Plan to use tailwind for better and faster designs
+- improve the data analysis part
